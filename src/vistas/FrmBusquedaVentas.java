@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -54,9 +53,6 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
 
         return retValue;
     }
-    
-
-
 
     public void limpiarFormulario() {
         this.txtFechaDesde.setText("");
@@ -71,46 +67,44 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblVentas.getModel();
         if (ventas != null) {
             modelo.setRowCount(0);
-        }
-        else {
+        } else {
             for (Venta venta : ventas) {
                 modelo.addRow(venta.toArray());
             }
         }
 
     }
-    
-    public void cargarProductosVentaSeleccionada(){
-         DefaultTableModel modeloProductos = (DefaultTableModel) this.tblProductos.getModel();
-         limpiarVenta(modeloProductos);
+
+    public void cargarProductosVentaSeleccionada() {
+        DefaultTableModel modeloProductos = (DefaultTableModel) this.tblProductos.getModel();
+        limpiarVenta(modeloProductos);
         int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de  cargar esta venta?", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (opc == 0) {
-        int fila = this.tblVentas.getSelectedRow();
+            int fila = this.tblVentas.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) this.tblVentas.getModel();
             Integer idVenta = (Integer) modelo.getValueAt(fila, 0);
             Venta venta = this.controlVenta.consultarPorIdVenta(idVenta);
-           
+
             txtId.setText(String.valueOf(venta.getIdVenta()));
             txtDescuento.setText(String.valueOf(venta.getDescuento()));
-            txtSubtotal.setText(String.valueOf(((venta.getDescuento()/100)+1)*venta.getMontofinal()));
+            txtSubtotal.setText(String.valueOf(((venta.getDescuento() / 100) + 1) * venta.getMontofinal()));
             txtTotal.setText(String.valueOf(venta.getMontofinal()));
             for (RelacionProductoVenta producto : venta.getProductos()) {
                 modeloProductos.addRow(producto.toArrayProducto());
             }
-            
+
         }
     }
-    
-    public void limpiarVenta(DefaultTableModel modeloProductos){
-        
+
+    public void limpiarVenta(DefaultTableModel modeloProductos) {
+
         this.txtDescuento.setText("");
         this.txtTotal.setText("");
         this.txtSubtotal.setText("");
         modeloProductos.setRowCount(0);
-        
+
     }
-    
-    
+
     private void cargarCmbEmpleados() {
         Cliente seleccione = new Cliente();
         seleccione.setNombre("Todos");
@@ -122,7 +116,6 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
             }
         }
     }
-
 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -471,7 +464,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
 
     private void txtFechaHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaHastaKeyTyped
         char a = evt.getKeyChar();
-        if ((!Character.isDigit(a) && a != '-' && a!=':')) {//que sean solo números
+        if ((!Character.isDigit(a) && a != '-' && a != ':')) {//que sean solo números
             evt.consume();
         }
     }//GEN-LAST:event_txtFechaHastaKeyTyped
@@ -482,7 +475,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
 
     private void txtFechaDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaDesdeKeyTyped
         char a = evt.getKeyChar();
-        if ((!Character.isDigit(a) && a != '-' && a!=':')) {//que sean solo números
+        if ((!Character.isDigit(a) && a != '-' && a != ':')) {//que sean solo números
             evt.consume();
         }
     }//GEN-LAST:event_txtFechaDesdeKeyTyped
@@ -528,7 +521,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jmProveedoresActionPerformed
 
     private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
-       cargarProductosVentaSeleccionada();
+        cargarProductosVentaSeleccionada();
     }//GEN-LAST:event_tblVentasMouseClicked
 
     /**
@@ -566,11 +559,9 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         });
     }
 
-    
-    
     public boolean contiene(GregorianCalendar fecha) {
         try {
-          
+
             if ((fecha.after(sf.parse(txtFechaDesde.getText())) || fecha.equals(sf.parse(txtFechaDesde.getText()))) && (fecha.before(sf.parse(txtFechaHasta.getText())) || fecha.equals(sf.parse(txtFechaHasta.getText())))) {
                 return true;
             } else {

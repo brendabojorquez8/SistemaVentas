@@ -366,27 +366,34 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnActualizar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Actualizar"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/btnActualizar.png"/>
+                </Property>
+                <Property name="actionCommand" type="java.lang.String" value=""/>
+                <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="664" y="516" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="640" y="520" width="80" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JButton" name="btnEliminar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Eliminar"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/btnEliminar.png"/>
+                </Property>
+                <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="753" y="516" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="730" y="520" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

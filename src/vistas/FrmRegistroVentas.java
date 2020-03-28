@@ -122,7 +122,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
         txtTotal.setText("0");
         txtTotal.setToolTipText("");
 
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btnBuscar.png"))); // NOI18N
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btnRegistrar.png"))); // NOI18N
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {

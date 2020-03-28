@@ -206,21 +206,24 @@ public class FrmCategoria extends javax.swing.JFrame {
         });
         jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 70, 20));
 
-        btnActualizar.setText("Actualizar");
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btnActualizar.png"))); // NOI18N
+        btnActualizar.setActionCommand("");
+        btnActualizar.setContentAreaFilled(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 516, -1, -1));
+        jPanel2.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 80, -1));
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btnEliminar.png"))); // NOI18N
+        btnEliminar.setContentAreaFilled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 516, -1, -1));
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
 
         lbCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Categoría.jpg"))); // NOI18N
         jPanel2.add(lbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
