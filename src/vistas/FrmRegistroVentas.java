@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import objetosNegocio.Cliente;
 import objetosNegocio.Producto;
 import objetosNegocio.RelacionProductoVenta;
 import objetosNegocio.Venta;
@@ -23,6 +24,8 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     ControlProducto controlProducto;
     ControlCliente controlCliente;
     ControlVenta controlVenta;
+    private int cnt;
+    private Producto producto;
 
     /**
      * Creates new form FrmRegistroVentas
@@ -34,6 +37,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
         this.controlVenta = new ControlVenta();
         btnRegistrar.setEnabled(false);
         cargarProductos();
+        cargarCmbClientes();
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
         int width = pantalla.width;
@@ -47,6 +51,19 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
                 getImage(ClassLoader.getSystemResource("images/icono.png"));
 
         return retValue;
+    }
+    
+    private void cargarCmbClientes() {
+        Cliente seleccione = new Cliente();
+        seleccione.setNombre("Seleccione");
+        cmbCliente.addItem(seleccione);
+        List<Cliente> clientes = this.controlCliente.consultarClientes(txtBusqueda.getText());
+        if (clientes != null) {
+            for (Cliente cliente : clientes) {
+                cmbCliente.addItem(cliente);
+            }
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -64,6 +81,8 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
         txtTotal = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lbEmpleado = new javax.swing.JLabel();
+        cmbCliente = new javax.swing.JComboBox<>();
         panelBuscadorProductos = new javax.swing.JPanel();
         txtBusqueda = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -140,6 +159,8 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
             }
         });
 
+        lbEmpleado.setText("Cliente");
+
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(
@@ -149,25 +170,36 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbSubtotal)
-                            .addComponent(lbDescuento)
-                            .addComponent(lbTotal))
-                        .addGap(35, 35, 35)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSubtotal, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                            .addComponent(txtDescuento)
-                            .addComponent(txtTotal)))
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbSubtotal)
+                                    .addComponent(lbDescuento)
+                                    .addComponent(lbTotal))
+                                .addGap(35, 35, 35)
+                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSubtotal, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                    .addComponent(txtDescuento)
+                                    .addComponent(txtTotal)))
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(btnRegistrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btnRegistrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addComponent(lbEmpleado)
+                        .addGap(35, 35, 35)
+                        .addComponent(cmbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelDatosLayout.setVerticalGroup(
             panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(48, 48, 48)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbEmpleado)
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -410,9 +442,11 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
+            if(cmbCliente.getSelectedItem().toString()=="Seleccione"){
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente");
+        }else{
             registrarVenta();
-
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -421,6 +455,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         seleccionarProducto();
+        actualizarStockInv(producto, cnt);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -506,28 +541,28 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     }
 
     private void seleccionarProducto() {
-        DefaultTableModel modeloSeleccionados = (DefaultTableModel) tblProductosSeleccionados.getModel();
+       DefaultTableModel modeloSeleccionados = (DefaultTableModel) tblProductosSeleccionados.getModel();
         int fila = this.tblProductos.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un producto", "información", JOptionPane.INFORMATION_MESSAGE);
         } else {
             DefaultTableModel modelo = (DefaultTableModel) this.tblProductos.getModel();
             Integer idProducto = (Integer) modelo.getValueAt(fila, 0);
-            Producto producto = this.controlProducto.consultarPorIdProducto(idProducto);
+            producto = this.controlProducto.consultarPorIdProducto(idProducto);
             if (producto != null) {
                 int productoExistente = contains(idProducto);
                 String cant = JOptionPane.showInputDialog(this, "Ingrese la cantidad");
                 if (cant != null && !cant.isEmpty()) {
-                    Integer cantidad = Integer.parseInt(cant);
-                    if (cantidad <= producto.getStock() && producto.getStock() != 0) {
+                    cnt = Integer.parseInt(cant);
+                    if (cnt <= producto.getStock() && producto.getStock() != 0) {
                         if (productoExistente == -1) {
-                            modeloSeleccionados.addRow(toArrayProducto(producto, cantidad));
-                            actualizarStock(producto, cantidad);
+                            modeloSeleccionados.addRow(toArrayProducto(producto, cnt));
+                            actualizarStock(producto, cnt);
                             btnRegistrar.setEnabled(true);
                         } else {
-                            actualizarStock(producto, cantidad);
-                            cantidad += (Integer) modeloSeleccionados.getValueAt(productoExistente, 3);
-                            modeloSeleccionados.setValueAt(cantidad, productoExistente, 3);
+                            actualizarStock(producto, cnt);
+                            cnt += (Integer) modeloSeleccionados.getValueAt(productoExistente, 3);
+                            modeloSeleccionados.setValueAt(cnt, productoExistente, 3);
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "No se cuenta con la cantidad requerida");
@@ -583,6 +618,11 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
         this.controlProducto.actualizarProducto(producto);
     }
 
+    private void actualizarStockInv(Producto producto, int cantidad) {
+        producto.setStock(producto.getStock() + cantidad);
+        this.controlProducto.actualizarProducto(producto);
+    }
+    
     private void eliminarProducto() {
         int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de eliminar el producto seleccionado?", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (opc == 0) {
@@ -615,17 +655,15 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
 
     private void registrarVenta() {
         Venta venta = new Venta();
+        Cliente cliente = (Cliente) cmbCliente.getSelectedItem();
         venta.setDescuento((txtDescuento.getText().isEmpty()) ? 0F : Float.parseFloat(txtDescuento.getText()));
         venta.setMontofinal((txtTotal.getText().isEmpty()) ? 0F : Float.parseFloat(txtTotal.getText()));
         venta.setFecha(new GregorianCalendar());
+        cliente.addVenta(venta);
          obtenerLista(venta);
         controlVenta.guardarVenta(venta);
 
         limpiarFormulario();
-        
-        
-
-
     }
 
     public static void main(String args[]) {
@@ -666,6 +704,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<Object> cmbCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -678,6 +717,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmProveedores;
     private javax.swing.JMenuItem jmSalir;
     private javax.swing.JLabel lbDescuento;
+    private javax.swing.JLabel lbEmpleado;
     private javax.swing.JLabel lbRegistroVentas;
     private javax.swing.JLabel lbSubtotal;
     private javax.swing.JLabel lbTotal;

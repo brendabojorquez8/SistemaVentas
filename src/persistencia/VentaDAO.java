@@ -26,7 +26,7 @@ public class VentaDAO extends BaseDAO<Venta>{
 
     @Override
     public boolean insert(Venta venta) {
-        //            INSERCIÓN
+       //            INSERCIÓN
         entityManager.getTransaction().begin();
         if (venta != null) {
             entityManager.persist(venta);

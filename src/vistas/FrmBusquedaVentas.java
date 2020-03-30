@@ -67,7 +67,15 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblVentas.getModel();
         if (ventas != null) {
             modelo.setRowCount(0);
-        } else {
+        }
+        if (cmbEmpleados.getSelectedIndex() != 0) {
+            for (Venta venta : ventas) {
+                if (venta.getCliente().equals((Cliente) cmbEmpleados.getSelectedItem()) || contiene(venta.getFecha())) {
+                    modelo.addRow(venta.toArray());
+                }
+            }
+        } 
+        else {
             for (Venta venta : ventas) {
                 modelo.addRow(venta.toArray());
             }
