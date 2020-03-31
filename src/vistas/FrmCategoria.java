@@ -180,7 +180,7 @@ public class FrmCategoria extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id_Cliente", "Nombre", "Descripción"
+                "Id_Categoria", "Nombre", "Descripción"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -207,7 +207,6 @@ public class FrmCategoria extends javax.swing.JFrame {
         jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 70, 20));
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btnActualizar.png"))); // NOI18N
-        btnActualizar.setActionCommand("");
         btnActualizar.setContentAreaFilled(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

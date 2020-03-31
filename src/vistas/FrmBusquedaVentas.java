@@ -68,9 +68,9 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         if (ventas != null) {
             modelo.setRowCount(0);
         }
-        if (cmbEmpleados.getSelectedIndex() != 0) {
+        if (cmbClientes.getSelectedIndex() != 0) {
             for (Venta venta : ventas) {
-                if (venta.getCliente().equals((Cliente) cmbEmpleados.getSelectedItem()) || contiene(venta.getFecha())) {
+                if (venta.getCliente().toString().equals(cmbClientes.getSelectedItem()) || contiene(venta.getFecha())) {
                     modelo.addRow(venta.toArray());
                 }
             }
@@ -116,11 +116,11 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
     private void cargarCmbEmpleados() {
         Cliente seleccione = new Cliente();
         seleccione.setNombre("Todos");
-        cmbEmpleados.addItem(seleccione.toString());
+        cmbClientes.addItem(seleccione.toString());
         List<Cliente> clientes = this.controlCliente.consultarClientes("");
         if (clientes != null) {
             for (Cliente cliente : clientes) {
-                cmbEmpleados.addItem(cliente.toString());
+                cmbClientes.addItem(cliente.toString());
             }
         }
     }
@@ -140,7 +140,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         panVentas = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        cmbEmpleados = new javax.swing.JComboBox<>();
+        cmbClientes = new javax.swing.JComboBox<>();
         panelDatosVenta = new javax.swing.JPanel();
         lbSubtotal = new javax.swing.JLabel();
         txtSubtotal = new javax.swing.JTextField();
@@ -250,7 +250,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFechaDesde, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                    .addComponent(cmbEmpleados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(txtFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 108, Short.MAX_VALUE))
@@ -260,7 +260,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
             .addGroup(panelDatosLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -582,7 +582,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String> cmbEmpleados;
+    private javax.swing.JComboBox<String> cmbClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
