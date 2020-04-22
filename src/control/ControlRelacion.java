@@ -1,22 +1,18 @@
-
 package control;
 
 import java.util.List;
-import objetosNegocio.RelacionProductoVenta;
+import entidades.RelacionProductoVenta;
 import persistencia.RelacionDAO;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class ControlRelacion {
-    RelacionDAO relacion=new RelacionDAO();
-    
+
+    RelacionDAO relacion = new RelacionDAO();
+
     public boolean guardarVenta(RelacionProductoVenta relacion) {
         return this.relacion.insert(relacion);
     }
 
-    public boolean actualizarVenta(RelacionProductoVenta relacion ) {
+    public boolean actualizarVenta(RelacionProductoVenta relacion) {
         return this.relacion.update(relacion);
     }
 

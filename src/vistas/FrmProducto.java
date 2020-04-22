@@ -9,14 +9,10 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Categoria;
-import objetosNegocio.Producto;
-import objetosNegocio.Proveedor;
+import entidades.Categoria;
+import entidades.Producto;
+import entidades.Proveedor;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class FrmProducto extends javax.swing.JFrame {
 
     private ControlProducto controlProducto;
@@ -308,7 +304,7 @@ public class FrmProducto extends javax.swing.JFrame {
         });
         jmMenu1.add(jmProveedores);
 
-        jmCategorias.setText("Cateorias");
+        jmCategorias.setText("Categorias");
         jmCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmCategoriasActionPerformed(evt);
@@ -522,7 +518,7 @@ public class FrmProducto extends javax.swing.JFrame {
 
     private void actualizarProducto() {
         Producto producto = new Producto();
-        producto.setIdProducto(Integer.parseInt(txtId.getText()));
+        producto.setId(Integer.parseInt(txtId.getText()));
         producto.setNombre(txtNombre.getText());
         producto.setPrecioActual(Float.parseFloat(txtPrecioActual.getText()));
         producto.setStock(Integer.parseInt(txtStock.getText()));
@@ -547,7 +543,7 @@ public class FrmProducto extends javax.swing.JFrame {
             Integer idProducto = (Integer) modelo.getValueAt(fila, 0);
             Producto producto = this.controlProducto.consultarPorIdProducto(idProducto);
             if (producto != null) {
-                txtId.setText(producto.getIdProducto().toString());
+                txtId.setText(producto.getId().toString());
                 txtNombre.setText(producto.getNombre());
                 txtStock.setText(String.valueOf(producto.getStock()));
                 txtPrecioActual.setText(String.valueOf(producto.getPrecioActual()));

@@ -2,26 +2,22 @@ package persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import objetosNegocio.Categoria;
+import entidades.Categoria;
 
+public class CategoriaDAO extends BaseDAO<Categoria> {
 
-
-public class CategoriaDAO extends BaseDAO<Categoria>{
-
-   
     EntityManager entityManager = getEntityManager();
 
     /**
      * Método booleano que añade las categorías al entityManager
+     *
      * @param categoria
-     * @return 
+     * @return
      */
     @Override
     public boolean insert(Categoria categoria) {
@@ -39,15 +35,16 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
     /**
      * Método que permite actualizar la categoría en caso necesario mientras no
      * sea diferente de null
+     *
      * @param categoria
-     * @return verdadero o falso dependiendo de si se puede realizar la 
+     * @return verdadero o falso dependiendo de si se puede realizar la
      * actualización o no
      */
     @Override
     public boolean update(Categoria categoria) {
         //       FIND BY ID AND UPDATE
         entityManager.getTransaction().begin();
-        Categoria update = entityManager.find(Categoria.class, categoria.getIdCategoria());
+        Categoria update = entityManager.find(Categoria.class, categoria.getId());
         if (update != null) {
             update.setNombre(categoria.getNombre());
             update.setDescripcion(categoria.getDescripcion());
@@ -63,6 +60,7 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
     /**
      * Método que permite remover una categoría siempre y cuando esa categoría
      * se encuentre dentro de la base de datos
+     *
      * @param categoria
      * @return verdadero o falso dependiendo de si se pudo remover la categoría
      * o no
@@ -71,7 +69,7 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
     public boolean remove(Categoria categoria) {
         //      REMOVE
         entityManager.getTransaction().begin();
-        Categoria remove = entityManager.find(Categoria.class, categoria.getIdCategoria());
+        Categoria remove = entityManager.find(Categoria.class, categoria.getId());
         if (remove != null) {
             entityManager.remove(remove);
         } else {
@@ -83,9 +81,10 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
 
     /**
      * Método que regresa una categoría encontrándola por ID
+     *
      * @param id
-     * @return La categoría en caso de que se encuentre o null en caso de 
-     * no ser encontrada
+     * @return La categoría en caso de que se encuentre o null en caso de no ser
+     * encontrada
      */
     @Override
     public Categoria findById(Integer id) {
@@ -93,18 +92,18 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
         entityManager.getTransaction().begin();
         Categoria update = entityManager.find(Categoria.class, id);
         if (update != null) {
-             entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
             return update;
-        } 
-       entityManager.getTransaction().commit();
-       return null;
+        }
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     /**
      * Método que regresa una categoría de la base de datos buscándola por
-     * nombre, si no se ingresa un nombre o este es nulo, se regresa la
-     * lista vacía, en caso contrario, muestra la búsqueda
-     * 
+     * nombre, si no se ingresa un nombre o este es nulo, se regresa la lista
+     * vacía, en caso contrario, muestra la búsqueda
+     *
      * @param busqueda
      * @return La categoría buscada
      */
@@ -128,7 +127,7 @@ public class CategoriaDAO extends BaseDAO<Categoria>{
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery criteria = builder.createQuery(Categoria.class);
             Root root = criteria.from(Categoria.class);
-            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%"+busqueda+"%"));
+            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%" + busqueda + "%"));
             TypedQuery query = entityManager.createQuery(criteria);
             List<Categoria> categorias = query.getResultList();
             entityManager.getTransaction().commit();

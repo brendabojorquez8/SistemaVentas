@@ -1,23 +1,18 @@
-
 package control;
 
+import entidades.Categoria;
 import java.util.List;
-import objetosNegocio.*;
 import persistencia.*;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360  
- */
 public class ControlCategoria {
-    CategoriaDAO categoria= new CategoriaDAO();
-    
-    
+
+    CategoriaDAO categoria = new CategoriaDAO();
+
     public boolean guardarCategoria(Categoria categoria) {
         return this.categoria.insert(categoria);
     }
 
-    public boolean actualizarCategoria(Categoria categoria ) {
+    public boolean actualizarCategoria(Categoria categoria) {
         return this.categoria.update(categoria);
     }
 

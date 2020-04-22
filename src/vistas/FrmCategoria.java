@@ -7,12 +7,8 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Categoria;
+import entidades.Categoria;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class FrmCategoria extends javax.swing.JFrame {
 
     private ControlCategoria controlCategoria;
@@ -449,7 +445,7 @@ public class FrmCategoria extends javax.swing.JFrame {
 
     private void actualizarCategoria() {
         Categoria categoria = new Categoria();
-        categoria.setIdCategoria(Integer.parseInt(txtId.getText()));
+        categoria.setId(Integer.parseInt(txtId.getText()));
         categoria.setNombre(txtNombre.getText());
         categoria.setDescripcion(txtDescripcion.getText());
         if (this.controlCategoria.actualizarCategoria(categoria)) {
@@ -470,7 +466,7 @@ public class FrmCategoria extends javax.swing.JFrame {
             Integer idCategoria = (Integer) modelo.getValueAt(fila, 0);
             Categoria categoria = this.controlCategoria.consultarPorIdCategoria(idCategoria);
             if (categoria != null) {
-                txtId.setText(categoria.getIdCategoria().toString());
+                txtId.setText(categoria.getId().toString());
                 txtNombre.setText(categoria.getNombre());
                 txtDescripcion.setText(categoria.getDescripcion());
             } else {

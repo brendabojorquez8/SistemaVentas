@@ -1,17 +1,13 @@
-
 package control;
 
 import java.util.List;
-import objetosNegocio.Proveedor;
+import entidades.Proveedor;
 import persistencia.ProveedorDAO;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class ControlProveedor {
-    ProveedorDAO proveedor=new ProveedorDAO();
-    
+
+    ProveedorDAO proveedor = new ProveedorDAO();
+
     public boolean guardarProveedor(Proveedor proveedor) {
         return this.proveedor.insert(proveedor);
     }

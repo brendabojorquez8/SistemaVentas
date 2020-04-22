@@ -11,14 +11,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Cliente;
-import objetosNegocio.RelacionProductoVenta;
-import objetosNegocio.Venta;
+import entidades.Cliente;
+import entidades.RelacionProductoVenta;
+import entidades.Venta;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class FrmBusquedaVentas extends javax.swing.JFrame {
 
     SimpleDateFormat sf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -74,8 +70,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
                     modelo.addRow(venta.toArray());
                 }
             }
-        } 
-        else {
+        } else {
             for (Venta venta : ventas) {
                 modelo.addRow(venta.toArray());
             }
@@ -93,7 +88,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
             Integer idVenta = (Integer) modelo.getValueAt(fila, 0);
             Venta venta = this.controlVenta.consultarPorIdVenta(idVenta);
 
-            txtId.setText(String.valueOf(venta.getIdVenta()));
+            txtId.setText(String.valueOf(venta.getId()));
             txtDescuento.setText(String.valueOf(venta.getDescuento()));
             txtSubtotal.setText(String.valueOf(((venta.getDescuento() / 100) + 1) * venta.getMontofinal()));
             txtTotal.setText(String.valueOf(venta.getMontofinal()));
@@ -178,7 +173,7 @@ public class FrmBusquedaVentas extends javax.swing.JFrame {
         panelDatos.setBackground(new java.awt.Color(255, 255, 255));
         panelDatos.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscador de Ventas"));
 
-        lbFecha.setText("Fecha(dd-MMM-yyyy HH:mm:ss)");
+        lbFecha.setText("Fecha(dd-MMM-yyyy)");
 
         txtFechaDesde.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

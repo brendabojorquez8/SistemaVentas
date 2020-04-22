@@ -224,7 +224,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lbFecha">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Fecha(dd-MMM-yyyy HH:mm:ss)"/>
+                    <Property name="text" type="java.lang.String" value="Fecha(dd-MMM-yyyy)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFechaDesde">

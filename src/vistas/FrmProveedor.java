@@ -7,12 +7,8 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Proveedor;
+import entidades.Proveedor;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class FrmProveedor extends javax.swing.JFrame {
 
     private ControlProveedor controlProveedor;
@@ -546,7 +542,7 @@ public class FrmProveedor extends javax.swing.JFrame {
 
     private void actualizarProveedor() {
         Proveedor proveedor = new Proveedor();
-        proveedor.setIdProveedor(Integer.parseInt(txtId.getText()));
+        proveedor.setId(Integer.parseInt(txtId.getText()));
         proveedor.setRfc(txtRfc.getText());
         proveedor.setNombre(txtNombre.getText());
         proveedor.setDireccion(txtDireccion.getText());
@@ -570,7 +566,7 @@ public class FrmProveedor extends javax.swing.JFrame {
             Integer idProveedor = (Integer) modelo.getValueAt(fila, 0);
             Proveedor proveedor = this.controlProveedor.consultarPorIdProveedor(idProveedor);
             if (proveedor != null) {
-                txtId.setText(proveedor.getIdProveedor().toString());
+                txtId.setText(proveedor.getId().toString());
                 txtRfc.setText(proveedor.getRfc());
                 txtNombre.setText(proveedor.getNombre());
                 txtDireccion.setText(proveedor.getDireccion());

@@ -12,12 +12,8 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Cliente;
+import entidades.Cliente;
 
-/**
- *
- * @author brend
- */
 public class FrmCliente extends javax.swing.JFrame {
 
     private ControlCliente controlCliente;
@@ -549,7 +545,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
     private void actualizarCliente() {
         Cliente cliente = new Cliente();
-        cliente.setIdCliente(Integer.parseInt(txtId.getText()));
+        cliente.setId(Integer.parseInt(txtId.getText()));
         cliente.setRfc(txtRfc.getText());
         cliente.setNombre(txtNombre.getText());
         cliente.setDireccion(txtDireccion.getText());
@@ -573,7 +569,7 @@ public class FrmCliente extends javax.swing.JFrame {
             Integer idCliente = (Integer) modelo.getValueAt(fila, 0);
             Cliente cliente = this.controlCliente.consultarPorIdCliente(idCliente);
             if (cliente != null) {
-                txtId.setText(cliente.getIdCliente().toString());
+                txtId.setText(cliente.getId().toString());
                 txtRfc.setText(cliente.getRfc());
                 txtNombre.setText(cliente.getNombre());
                 txtDireccion.setText(cliente.getDireccion());

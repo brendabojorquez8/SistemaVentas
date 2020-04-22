@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class Menu extends javax.swing.JFrame {
 
     /**

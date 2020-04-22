@@ -10,15 +10,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetosNegocio.Cliente;
-import objetosNegocio.Producto;
-import objetosNegocio.RelacionProductoVenta;
-import objetosNegocio.Venta;
+import entidades.Cliente;
+import entidades.Producto;
+import entidades.RelacionProductoVenta;
+import entidades.Venta;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class FrmRegistroVentas extends javax.swing.JFrame {
 
     ControlProducto controlProducto;
@@ -596,7 +592,7 @@ public class FrmRegistroVentas extends javax.swing.JFrame {
     private Object[] toArrayProducto(Producto producto, int cantidad) {
 
         return new Object[]{
-            producto.getIdProducto(),
+            producto.getId(),
             producto.getNombre(),
             producto.getPrecioActual(),
             cantidad,

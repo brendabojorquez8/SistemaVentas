@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import objetosNegocio.Cliente;
+import entidades.Cliente;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class ClienteDAO extends BaseDAO<Cliente> {
 
     EntityManager entityManager = getEntityManager();
+
     @Override
     public boolean insert(Cliente cliente) {
         //            INSERCIÓN
@@ -40,7 +30,7 @@ public class ClienteDAO extends BaseDAO<Cliente> {
     public boolean update(Cliente cliente) {
         //       FIND BY ID AND UPDATE
         entityManager.getTransaction().begin();
-        Cliente update = entityManager.find(Cliente.class, cliente.getIdCliente());
+        Cliente update = entityManager.find(Cliente.class, cliente.getId());
         if (update != null) {
             update.setNombre(cliente.getNombre());
             update.setDireccion(cliente.getDireccion());
@@ -60,7 +50,7 @@ public class ClienteDAO extends BaseDAO<Cliente> {
     public boolean remove(Cliente cliente) {
         //      REMOVE
         entityManager.getTransaction().begin();
-        Cliente remove = entityManager.find(Cliente.class, cliente.getIdCliente());
+        Cliente remove = entityManager.find(Cliente.class, cliente.getId());
         if (remove != null) {
             entityManager.remove(remove);
         } else {
@@ -104,7 +94,7 @@ public class ClienteDAO extends BaseDAO<Cliente> {
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery criteria = builder.createQuery(Cliente.class);
             Root root = criteria.from(Cliente.class);
-            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%"+busqueda+"%"));
+            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%" + busqueda + "%"));
             TypedQuery query = entityManager.createQuery(criteria);
             List<Cliente> clientes = query.getResultList();
             entityManager.getTransaction().commit();

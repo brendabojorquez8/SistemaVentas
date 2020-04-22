@@ -1,19 +1,13 @@
-
 package control;
 
 import java.util.List;
-import javax.swing.JTable;
-import objetosNegocio.Producto;
+import entidades.Producto;
 import persistencia.ProductoDAO;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
 public class ControlProducto {
-    ProductoDAO producto=new ProductoDAO();
-    
-    
+
+    ProductoDAO producto = new ProductoDAO();
+
     public boolean guardarProducto(Producto producto) {
         return this.producto.insert(producto);
     }
@@ -33,6 +27,5 @@ public class ControlProducto {
     public List<Producto> consultarProductos(String busqueda) {
         return this.producto.find(busqueda);
     }
-    
 
 }

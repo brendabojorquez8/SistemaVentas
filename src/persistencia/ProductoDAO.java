@@ -1,26 +1,17 @@
-    
 package persistencia;
-
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.Producto;
 
-import objetosNegocio.Producto;
+public class ProductoDAO extends BaseDAO<Producto> {
 
-
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
-public class ProductoDAO extends BaseDAO<Producto>{
-   EntityManager entityManager = getEntityManager();
+    EntityManager entityManager = getEntityManager();
 
     @Override
     public boolean insert(Producto producto) {
@@ -39,7 +30,7 @@ public class ProductoDAO extends BaseDAO<Producto>{
     public boolean update(Producto producto) {
         //       FIND BY ID AND UPDATE
         entityManager.getTransaction().begin();
-        Producto update = entityManager.find(Producto.class, producto.getIdProducto());
+        Producto update = entityManager.find(Producto.class, producto.getId());
         if (update != null) {
             update.setNombre(producto.getNombre());
             update.setPrecioActual(producto.getPrecioActual());
@@ -58,7 +49,7 @@ public class ProductoDAO extends BaseDAO<Producto>{
     public boolean remove(Producto producto) {
         //      REMOVE
         entityManager.getTransaction().begin();
-        Producto remove = entityManager.find(Producto.class, producto.getIdProducto());
+        Producto remove = entityManager.find(Producto.class, producto.getId());
         if (remove != null) {
             entityManager.remove(remove);
         } else {
@@ -75,11 +66,11 @@ public class ProductoDAO extends BaseDAO<Producto>{
 
         Producto update = entityManager.find(Producto.class, id);
         if (update != null) {
-             entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
             return update;
-        } 
-       entityManager.getTransaction().commit();
-       return null;
+        }
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
@@ -102,14 +93,12 @@ public class ProductoDAO extends BaseDAO<Producto>{
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery criteria = builder.createQuery(Producto.class);
             Root root = criteria.from(Producto.class);
-            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%"+busqueda+"%"));
+            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%" + busqueda + "%"));
             TypedQuery query = entityManager.createQuery(criteria);
             List<Producto> productos = query.getResultList();
             entityManager.getTransaction().commit();
             return productos;
         }
     }
-    
-    
-   
+
 }

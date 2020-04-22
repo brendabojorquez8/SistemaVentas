@@ -1,23 +1,17 @@
-
 package persistencia;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import objetosNegocio.RelacionProductoVenta;
+import entidades.RelacionProductoVenta;
 
-/**
- *
- * @author ProyectoBD_02_204722_204360
- */
-public class RelacionDAO extends BaseDAO<RelacionProductoVenta>{
-  EntityManager entityManager = getEntityManager();
+public class RelacionDAO extends BaseDAO<RelacionProductoVenta> {
+
+    EntityManager entityManager = getEntityManager();
 
     @Override
     public boolean insert(RelacionProductoVenta relacion) {
@@ -50,7 +44,7 @@ public class RelacionDAO extends BaseDAO<RelacionProductoVenta>{
         entityManager.getTransaction().commit();
         return true;
     }
-    
+
     @Override
     public boolean remove(RelacionProductoVenta relacion) {
         //      REMOVE
@@ -72,17 +66,17 @@ public class RelacionDAO extends BaseDAO<RelacionProductoVenta>{
 
         RelacionProductoVenta update = entityManager.find(RelacionProductoVenta.class, id);
         if (update != null) {
-             entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
             return update;
-            
-        } 
-       entityManager.getTransaction().commit();
-       return null;
+
+        }
+        entityManager.getTransaction().commit();
+        return null;
     }
 
     @Override
     public List<RelacionProductoVenta> find(String busqueda) {
-       //          Consulta de datos
+        //          Consulta de datos
         entityManager.getTransaction().begin();
         if (busqueda == null || busqueda.isEmpty()) {
 
@@ -100,12 +94,12 @@ public class RelacionDAO extends BaseDAO<RelacionProductoVenta>{
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery criteria = builder.createQuery(RelacionProductoVenta.class);
             Root root = criteria.from(RelacionProductoVenta.class);
-            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%"+busqueda+"%"));
+            criteria = criteria.select(root).where(builder.like(root.get("nombre"), "%" + busqueda + "%"));
             TypedQuery query = entityManager.createQuery(criteria);
             List<RelacionProductoVenta> relaciones = query.getResultList();
             entityManager.getTransaction().commit();
             return relaciones;
         }
     }
-    
+
 }
